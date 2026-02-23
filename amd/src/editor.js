@@ -51,7 +51,11 @@ define(['jquery', 'core/str'], function($, Str) {
                 const editorContent = document.createElement('div');
                 editorContent.className = 'tiptap-content';
                 editorContent.contentEditable = true;
-                editorContent.innerHTML = textarea.value || '';
+                const parser = new DOMParser();
+                const parsedDoc = parser.parseFromString(textarea.value || '', 'text/html');
+                while (parsedDoc.body.firstChild) {
+                    editorContent.appendChild(parsedDoc.body.firstChild);
+                }
 
                 // Build toolbar buttons.
                 const buttons = [];
