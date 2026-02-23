@@ -53,6 +53,21 @@ define(['jquery', 'core/str'], function($, Str) {
                 editorContent.contentEditable = true;
                 const parser = new DOMParser();
                 const parsedDoc = parser.parseFromString(textarea.value || '', 'text/html');
+                // Remove dangerous elements (scripts, etc.) from the inert document.
+                parsedDoc.body.querySelectorAll(
+                    'script, object, embed, link[rel="import"]'
+                ).forEach(function(el) { el.parentNode.removeChild(el); });
+                // Remove event handler attributes and javascript: URLs.
+                parsedDoc.body.querySelectorAll('*').forEach(function(el) {
+                    Array.from(el.attributes).forEach(function(attr) {
+                        var name = attr.name.toLowerCase();
+                        // Strip all whitespace and control characters before comparing.
+                        var val = attr.value.replace(/[\s\u0000-\u001f\u007f-\u009f\ufeff]/g, '');
+                        if (name.startsWith('on') || /^javascript:/i.test(val)) {
+                            el.removeAttribute(attr.name);
+                        }
+                    });
+                });
                 while (parsedDoc.body.firstChild) {
                     editorContent.appendChild(parsedDoc.body.firstChild);
                 }
