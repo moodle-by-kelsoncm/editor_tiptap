@@ -24,9 +24,10 @@ html_theme_options = {
     "github_url": "https://github.com/moodle-by-kelsoncm/editor_tiptap",
     "github_repo": "moodle-by-kelsoncm/editor_tiptap",
     "github_version": "main",
-    "doc_path": "docs/",
+    "doc_path": "docs/pt-br/",
     "show_edit_on_github": True,
     "enable_dark_mode": True,
+    "enable_language_selector": True,
     "navigation_links": "Início|index, Instalação|installation, Configuração|configuration, Uso|usage",
 }
 
