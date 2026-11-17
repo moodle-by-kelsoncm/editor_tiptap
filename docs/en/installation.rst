@@ -21,7 +21,7 @@ Installation Steps
 
    .. code-block:: bash
 
-      git clone https://github.com/moodle-by-kelsoncm/editor_tiptap.git editor_tiptap
+      git clone https://github.com/moodle-by-kelsoncm/moodle-editor_tiptap.git editor_tiptap
 
 3. Access the Moodle administration page at **Site administration > Notifications**.
 4. Follow the on-screen instructions to complete database upgrades and table creation.
