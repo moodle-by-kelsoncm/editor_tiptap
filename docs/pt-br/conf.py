@@ -21,8 +21,8 @@ html_theme_path = [moodle_docs_theme.get_html_theme_path()]
 html_theme_options = {
     "project_name": "moodle-editor_tiptap",
     "tagline": "Editor WYSIWYG moderno para o Moodle baseado na biblioteca TipTap",
-    "github_url": "https://github.com/moodle-by-kelsoncm/editor_tiptap",
-    "github_repo": "moodle-by-kelsoncm/editor_tiptap",
+    "github_url": "https://github.com/moodle-by-kelsoncm/moodle-editor_tiptap",
+    "github_repo": "moodle-by-kelsoncm/moodle-editor_tiptap",
     "github_version": "main",
     "doc_path": "docs/pt-br/",
     "show_edit_on_github": True,
