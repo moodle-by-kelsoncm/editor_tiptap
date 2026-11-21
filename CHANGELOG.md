@@ -2,6 +2,11 @@
 
 All notable changes to the TipTap editor plugin (`editor_tiptap`) will be documented in this file.
 
+## 1.1.1 - 2026-11-21
+
+### Fixed
+- The saved text no longer carries the `yui_...` ids that Moodle's YUI adds to the nodes of the editing area (for example `<table id="yui_3_18_...">`).
+
 ## 1.1.0 - 2026-11-21
 
 First version prepared for the Moodle Marketplace.

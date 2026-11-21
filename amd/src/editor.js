@@ -294,7 +294,11 @@ export const init = async(elementId, options) => {
     let changed = false;
     const sync = () => {
         changed = true;
-        textarea.value = content.innerHTML;
+        // Moodle's YUI adds ids (yui_...) to the nodes it handles in the page; ids are not in
+        // the allow list, so they are removed from the saved HTML.
+        const clean = content.cloneNode(true);
+        clean.querySelectorAll('[id]').forEach((el) => el.removeAttribute('id'));
+        textarea.value = clean.innerHTML;
     };
 
     toolbar.appendChild(buildBlockSelect(str, content, sync));
