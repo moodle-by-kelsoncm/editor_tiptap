@@ -1,16 +1,17 @@
 Configuration
 =============
 
-Plugin Settings
+Plugin settings
 ---------------
 
-1. Go to: **Site administration > Plugins > Text editors > TipTap editor**.
-2. Check or uncheck toolbar action buttons according to what you wish to make available to users.
+1. Go to **Site administration > Plugins > Text editors > TipTap editor**.
+2. Turn the toolbar buttons on or off: bold, italic, underline, bullet list, ordered list and link.
+   The block format selector (paragraph and headings) and the undo and redo buttons are always shown.
 3. Save changes.
 
-Activating the Editor in Moodle
--------------------------------
+Enabling the editor
+-------------------
 
-1. Go to: **Site administration > Plugins > Text editors > Manage editors**.
-2. Click the eye icon to **Enable** "TipTap editor".
-3. Change the priority order of editors using the up/down arrows if you want to set it as the default editor.
+1. Go to **Site administration > Plugins > Text editors > Manage editors**.
+2. Enable **TipTap editor** (eye icon).
+3. Move it to the top of the list with the arrows to make it the default editor of the site.

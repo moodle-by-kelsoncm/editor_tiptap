@@ -3,7 +3,7 @@ import moodle_docs_theme
 project = "moodle-editor_tiptap"
 copyright = "2025, Kelson da Costa Medeiros"
 author = "Kelson da Costa Medeiros"
-release = "1.0"
+release = "1.1.0"
 
 extensions = [
     "sphinx.ext.githubpages",
@@ -20,7 +20,7 @@ html_theme_path = [moodle_docs_theme.get_html_theme_path()]
 
 html_theme_options = {
     "project_name": "moodle-editor_tiptap",
-    "tagline": "Editor WYSIWYG moderno para o Moodle baseado na biblioteca TipTap",
+    "tagline": "Editor de texto WYSIWYG leve para o Moodle",
     "github_url": "https://github.com/moodle-by-kelsoncm/moodle-editor_tiptap",
     "github_repo": "moodle-by-kelsoncm/moodle-editor_tiptap",
     "github_version": "main",

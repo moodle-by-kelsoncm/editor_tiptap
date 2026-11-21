@@ -1,244 +1,156 @@
-/* TipTap Editor Styles */
+/**
+ * This file is part of Moodle - http://moodle.org/
+ *
+ * Moodle is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Moodle is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/**
+ * Styles of the TipTap editor.
+ *
+ * Colours come from the Bootstrap custom properties, so the editor follows the theme
+ * and the colour mode of Boost.
+ *
+ * @package    editor_tiptap
+ * @copyright  2025 Kelson da Costa Medeiros <kelsoncm@gmail.com>
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 
 .tiptap-editor-container {
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    background: #fff;
-    margin: 10px 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    flex: 1 1 100%;
+    width: 100%;
+    margin: 0.5rem 0;
+    border: 1px solid var(--bs-border-color);
+    border-radius: var(--bs-border-radius);
+    background: var(--bs-body-bg);
+    color: var(--bs-body-color);
 }
 
-.tiptap-toolbar {
+.tiptap-editor-container .tiptap-toolbar {
     display: flex;
     flex-wrap: wrap;
     gap: 4px;
     padding: 8px;
-    background: #f5f5f5;
-    border-bottom: 1px solid #ddd;
-    border-radius: 4px 4px 0 0;
+    background: var(--bs-tertiary-bg);
+    border-bottom: 1px solid var(--bs-border-color);
+    border-radius: var(--bs-border-radius) var(--bs-border-radius) 0 0;
 }
 
-.tiptap-button {
+.tiptap-editor-container .tiptap-button {
     min-width: 32px;
     height: 32px;
     padding: 4px 8px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    background: #fff;
+    border: 1px solid var(--bs-border-color);
+    border-radius: var(--bs-border-radius-sm);
+    background: var(--bs-body-bg);
+    color: var(--bs-body-color);
     cursor: pointer;
     font-size: 14px;
     font-weight: bold;
-    color: #333;
-    transition: all 0.2s;
 }
 
-.tiptap-button:hover {
-    background: #e8e8e8;
-    border-color: #999;
+.tiptap-editor-container .tiptap-button:hover {
+    background: var(--bs-secondary-bg);
 }
 
-.tiptap-button:active {
-    background: #ddd;
-}
-
-.tiptap-button:focus {
-    outline: 2px solid #0f6cbf;
+.tiptap-editor-container .tiptap-button:focus {
+    outline: 2px solid var(--bs-primary);
     outline-offset: 2px;
 }
 
-.tiptap-button[data-command="bold"] {
+.tiptap-editor-container .tiptap-button[data-command="bold"] {
     font-weight: 900;
 }
 
-.tiptap-button[data-command="italic"] {
+.tiptap-editor-container .tiptap-button[data-command="italic"] {
     font-style: italic;
 }
 
-.tiptap-button[data-command="underline"] {
+.tiptap-editor-container .tiptap-button[data-command="underline"] {
     text-decoration: underline;
 }
 
-.tiptap-toolbar .separator {
+.tiptap-editor-container .tiptap-toolbar select.tiptap-button {
+    min-width: 120px;
+    font-weight: normal;
+}
+
+.tiptap-editor-container .separator {
     width: 1px;
     height: 32px;
-    background: #ddd;
     margin: 0 4px;
+    background: var(--bs-border-color);
 }
 
-.tiptap-toolbar select {
-    min-width: 120px;
-    height: 32px;
-    padding: 4px 8px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    background: #fff;
-    cursor: pointer;
-    font-size: 14px;
-}
-
-.tiptap-content {
+.tiptap-editor-container .tiptap-content {
     min-height: 200px;
     max-height: 600px;
     overflow-y: auto;
     padding: 12px;
-    font-size: 14px;
     line-height: 1.6;
-    color: #333;
 }
 
-.tiptap-content:focus {
+.tiptap-editor-container .tiptap-content:focus {
     outline: none;
+    box-shadow: inset 0 0 0 2px var(--bs-primary);
 }
 
-/* Content styles */
-.tiptap-content h1 {
-    font-size: 2em;
-    font-weight: bold;
-    margin: 0.67em 0;
-}
-
-.tiptap-content h2 {
-    font-size: 1.5em;
-    font-weight: bold;
-    margin: 0.75em 0;
-}
-
-.tiptap-content h3 {
-    font-size: 1.17em;
-    font-weight: bold;
-    margin: 0.83em 0;
-}
-
-.tiptap-content p {
-    margin: 1em 0;
-}
-
-.tiptap-content ul,
-.tiptap-content ol {
+.tiptap-editor-container .tiptap-content ul,
+.tiptap-editor-container .tiptap-content ol {
     margin: 1em 0;
     padding-left: 40px;
 }
 
-.tiptap-content ul {
+.tiptap-editor-container .tiptap-content ul {
     list-style-type: disc;
 }
 
-.tiptap-content ol {
+.tiptap-editor-container .tiptap-content ol {
     list-style-type: decimal;
 }
 
-.tiptap-content li {
-    margin: 0.5em 0;
-}
-
-.tiptap-content a {
-    color: #0f6cbf;
-    text-decoration: underline;
-}
-
-.tiptap-content a:hover {
-    color: #0a5091;
-}
-
-.tiptap-content strong,
-.tiptap-content b {
-    font-weight: bold;
-}
-
-.tiptap-content em,
-.tiptap-content i {
-    font-style: italic;
-}
-
-.tiptap-content u {
-    text-decoration: underline;
-}
-
-.tiptap-content code {
-    background: #f4f4f4;
-    padding: 2px 6px;
-    border-radius: 3px;
-    font-family: "Courier New", Courier, monospace;
-    font-size: 0.9em;
-}
-
-.tiptap-content pre {
-    background: #f4f4f4;
-    padding: 12px;
-    border-radius: 3px;
-    overflow-x: auto;
-    font-family: "Courier New", Courier, monospace;
-    font-size: 0.9em;
-}
-
-.tiptap-content blockquote {
-    border-left: 4px solid #ddd;
-    padding-left: 16px;
+.tiptap-editor-container .tiptap-content blockquote {
     margin: 1em 0;
-    color: #666;
+    padding-left: 16px;
+    border-left: 4px solid var(--bs-border-color);
+    color: var(--bs-secondary-color);
 }
 
-/* Dark theme support */
-@media (prefers-color-scheme: dark) {
-    .tiptap-editor-container {
-        border-color: #444;
-        background: #2b2b2b;
-    }
-
-    .tiptap-toolbar {
-        background: #333;
-        border-bottom-color: #444;
-    }
-
-    .tiptap-button,
-    .tiptap-toolbar select {
-        background: #2b2b2b;
-        border-color: #555;
-        color: #ddd;
-    }
-
-    .tiptap-button:hover {
-        background: #3a3a3a;
-        border-color: #666;
-    }
-
-    .tiptap-content {
-        color: #ddd;
-    }
-
-    .tiptap-content code,
-    .tiptap-content pre {
-        background: #1e1e1e;
-    }
-
-    .tiptap-content blockquote {
-        border-left-color: #555;
-        color: #aaa;
-    }
+.tiptap-editor-container .tiptap-content pre,
+.tiptap-editor-container .tiptap-content code {
+    background: var(--bs-tertiary-bg);
+    border-radius: var(--bs-border-radius-sm);
 }
 
-/* Responsive design */
+.tiptap-editor-container .tiptap-content pre {
+    padding: 12px;
+    overflow-x: auto;
+}
+
 @media (max-width: 768px) {
-    .tiptap-toolbar {
+    .tiptap-editor-container .tiptap-toolbar {
         gap: 2px;
         padding: 6px;
     }
 
-    .tiptap-button {
+    .tiptap-editor-container .tiptap-button {
         min-width: 28px;
         height: 28px;
         font-size: 12px;
     }
 
-    .tiptap-toolbar select {
-        min-width: 100px;
-        height: 28px;
-        font-size: 12px;
-    }
-
-    .tiptap-content {
+    .tiptap-editor-container .tiptap-content {
         min-height: 150px;
         padding: 10px;
-        font-size: 13px;
     }
 }

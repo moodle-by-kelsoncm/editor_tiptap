@@ -18,37 +18,36 @@
  * Strings for component 'editor_tiptap', language 'en'.
  *
  * @package    editor_tiptap
- * @copyright  2025
+ * @copyright  2025 Kelson da Costa Medeiros <kelsoncm@gmail.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-$string['pluginname'] = 'TipTap editor';
-$string['privacy:metadata'] = 'The TipTap editor plugin does not store any personal data.';
-
-// Settings.
-$string['enablebold'] = 'Enable bold';
-$string['enablebold_desc'] = 'Enable bold formatting button in the toolbar';
-$string['enableitalic'] = 'Enable italic';
-$string['enableitalic_desc'] = 'Enable italic formatting button in the toolbar';
-$string['enableunderline'] = 'Enable underline';
-$string['enableunderline_desc'] = 'Enable underline formatting button in the toolbar';
-$string['enablebulletlist'] = 'Enable bullet list';
-$string['enablebulletlist_desc'] = 'Enable bullet list button in the toolbar';
-$string['enableorderedlist'] = 'Enable ordered list';
-$string['enableorderedlist_desc'] = 'Enable ordered list button in the toolbar';
-$string['enablelink'] = 'Enable link';
-$string['enablelink_desc'] = 'Enable link button in the toolbar';
-
-// Toolbar.
+$string['blockformat'] = 'Block format';
 $string['bold'] = 'Bold';
-$string['italic'] = 'Italic';
-$string['underline'] = 'Underline';
 $string['bulletlist'] = 'Bullet list';
-$string['orderedlist'] = 'Ordered list';
-$string['link'] = 'Insert link';
-$string['undo'] = 'Undo';
-$string['redo'] = 'Redo';
+$string['enablebold'] = 'Enable bold';
+$string['enablebold_desc'] = 'Show the bold button in the toolbar.';
+$string['enablebulletlist'] = 'Enable bullet list';
+$string['enablebulletlist_desc'] = 'Show the bullet list button in the toolbar.';
+$string['enableitalic'] = 'Enable italic';
+$string['enableitalic_desc'] = 'Show the italic button in the toolbar.';
+$string['enablelink'] = 'Enable link';
+$string['enablelink_desc'] = 'Show the insert link button in the toolbar.';
+$string['enableorderedlist'] = 'Enable ordered list';
+$string['enableorderedlist_desc'] = 'Show the ordered list button in the toolbar.';
+$string['enableunderline'] = 'Enable underline';
+$string['enableunderline_desc'] = 'Show the underline button in the toolbar.';
 $string['heading1'] = 'Heading 1';
 $string['heading2'] = 'Heading 2';
 $string['heading3'] = 'Heading 3';
+$string['italic'] = 'Italic';
+$string['link'] = 'Insert link';
+$string['linkurl'] = 'URL';
+$string['orderedlist'] = 'Ordered list';
 $string['paragraph'] = 'Paragraph';
+$string['pluginname'] = 'TipTap editor';
+$string['privacy:metadata'] = 'The TipTap editor plugin does not store any personal data.';
+$string['redo'] = 'Redo';
+$string['toolbar'] = 'Editor toolbar';
+$string['underline'] = 'Underline';
+$string['undo'] = 'Undo';

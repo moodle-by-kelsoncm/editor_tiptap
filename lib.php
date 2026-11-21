@@ -18,28 +18,25 @@
  * TipTap text editor integration.
  *
  * @package    editor_tiptap
- * @copyright  2025
+ * @copyright  2025 Kelson da Costa Medeiros <kelsoncm@gmail.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
-defined('MOODLE_INTERNAL') || die();
 
 /**
  * TipTap editor class.
  *
  * @package    editor_tiptap
- * @copyright  2025
+ * @copyright  2025 Kelson da Costa Medeiros <kelsoncm@gmail.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class tiptap_texteditor extends texteditor {
-
     /**
      * Is the current browser supported by this editor?
      *
      * @return bool
      */
     public function supported_by_browser() {
-        // TipTap requires modern browsers with JavaScript enabled.
+        // The editor needs a browser with JavaScript; Moodle only lists browsers that have it.
         return true;
     }
 
@@ -49,8 +46,7 @@ class tiptap_texteditor extends texteditor {
      * @return array
      */
     public function get_supported_formats() {
-        // TipTap works with HTML.
-        return array(FORMAT_HTML => FORMAT_HTML);
+        return [FORMAT_HTML => FORMAT_HTML];
     }
 
     /**
@@ -75,54 +71,38 @@ class tiptap_texteditor extends texteditor {
      * Use this editor for given element.
      *
      * @param string $elementid
-     * @param array $options Options for the editor
-     * @param array $fpoptions Options for the file picker
+     * @param array|null $options Options for the editor
+     * @param stdClass|null $fpoptions Options for the file picker
+     * @return void
      */
-    public function use_editor($elementid, array $options = null, $fpoptions = null) {
+    public function use_editor($elementid, ?array $options = null, $fpoptions = null) {
         global $PAGE;
 
-        // Load CSS styles.
-        $PAGE->requires->css('/editor/tiptap/styles.css');
-
-        // Load required JavaScript modules.
-        $PAGE->requires->js_call_amd('editor_tiptap/editor', 'init', array(
-            'elementId' => $elementid,
-            'options' => $this->get_editor_config()
-        ));
+        $PAGE->requires->js_call_amd('editor_tiptap/editor', 'init', [
+            $elementid,
+            $this->get_editor_config(),
+        ]);
     }
 
     /**
-     * Get editor configuration based on admin settings.
+     * Get the toolbar configuration from the admin settings.
      *
-     * @return array
+     * @return bool[] Button name => enabled.
      */
-    protected function get_editor_config() {
-        return array(
-            'enableBold' => get_config('editor_tiptap', 'enablebold'),
-            'enableItalic' => get_config('editor_tiptap', 'enableitalic'),
-            'enableUnderline' => get_config('editor_tiptap', 'enableunderline'),
-            'enableBulletList' => get_config('editor_tiptap', 'enablebulletlist'),
-            'enableOrderedList' => get_config('editor_tiptap', 'enableorderedlist'),
-            'enableLink' => get_config('editor_tiptap', 'enablelink'),
-        );
-    }
-
-    /**
-     * Returns the text from the editor.
-     *
-     * @return string
-     */
-    public function get_text() {
-        // The text is stored in the textarea element.
-        return '';
-    }
-
-    /**
-     * Set text to the editor.
-     *
-     * @param string $text
-     */
-    public function set_text($text) {
-        // Text is set via the textarea element.
+    public function get_editor_config(): array {
+        $buttons = [
+            'enableBold' => 'enablebold',
+            'enableItalic' => 'enableitalic',
+            'enableUnderline' => 'enableunderline',
+            'enableBulletList' => 'enablebulletlist',
+            'enableOrderedList' => 'enableorderedlist',
+            'enableLink' => 'enablelink',
+        ];
+        $config = [];
+        foreach ($buttons as $option => $setting) {
+            // Settings are stored as the strings '1' or '0', and '0' is truthy in JavaScript.
+            $config[$option] = (bool) get_config('editor_tiptap', $setting);
+        }
+        return $config;
     }
 }

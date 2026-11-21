@@ -18,14 +18,15 @@
  * TipTap editor version file.
  *
  * @package    editor_tiptap
- * @copyright  2025
+ * @copyright  2025 Kelson da Costa Medeiros <kelsoncm@gmail.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2025121500;        // The current plugin version (Date: YYYYMMDDXX).
-$plugin->requires  = 2022041900;        // Requires Moodle 4.0 or later.
-$plugin->component = 'editor_tiptap';   // Full name of the plugin (used for diagnostics).
+$plugin->component = 'editor_tiptap';
+$plugin->version   = 2026112100;
+$plugin->requires  = 2024100700;
+$plugin->supported = [405, 503];
 $plugin->maturity  = MATURITY_STABLE;
-$plugin->release   = '1.0';
+$plugin->release   = '1.1.0';
