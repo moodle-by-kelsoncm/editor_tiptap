@@ -1,120 +1,21 @@
-# Editor TipTap para Moodle
+# moodle-editor_tiptap
 
-Um plugin de editor WYSIWYG para Moodle que utiliza uma interface inspirada no TipTap.
+[English](#english) · [Português (Brasil)](#português-brasil)
 
-## Características
+Documentation / Documentação: <https://moodle-by-kelsoncm.github.io/moodle-editor_tiptap/>
 
-- Interface de editor moderna e responsiva
-- Suporte a formatação de texto básica (negrito, itálico, sublinhado)
-- Suporte a listas (ordenadas e não ordenadas)
-- Suporte a links
-- Suporte a cabeçalhos (H1, H2, H3)
-- Botões de desfazer/refazer
-- Configurações administrativas para habilitar/desabilitar funcionalidades
-- Suporte a tema escuro
-- Design responsivo para dispositivos móveis
+## English
 
-## Requisitos
+Lightweight WYSIWYG text editor for Moodle (`editor_tiptap`): a short toolbar (paragraph and headings, bold, italic, underline, lists, links, undo and redo) above an editable area that saves plain HTML. The interface is inspired by TipTap, but the plugin does not bundle the TipTap library and has no third-party JavaScript. Supports Moodle 4.5 LTS and 5.3 LTS.
 
-- Moodle 4.0 ou superior
-- PHP 7.4 ou superior
-- Navegadores modernos com JavaScript habilitado
+Install: upload the release ZIP at *Site administration > Plugins > Install plugins*, or clone this repository to `public/lib/editor/tiptap` (`lib/editor/tiptap` on Moodle 4.5) and visit *Site administration > Notifications*. Then enable it at *Site administration > Plugins > Text editors > Manage editors*.
 
-## Instalação
+Changes: [CHANGELOG.md](CHANGELOG.md). License: GNU GPL v3 or later.
 
-1. Copie o diretório `editor_tiptap` para a pasta `editor/` da sua instalação do Moodle.
-2. Acesse a página de notificações do Moodle (Site administration > Notifications).
-3. Siga as instruções na tela para completar a instalação.
+## Português (Brasil)
 
-## Configuração
+Editor de texto WYSIWYG leve para o Moodle (`editor_tiptap`): uma barra curta (parágrafo e títulos, negrito, itálico, sublinhado, listas, links, desfazer e refazer) acima de uma área editável que salva HTML simples. A interface é inspirada no TipTap, mas o plugin não inclui a biblioteca TipTap e não tem JavaScript de terceiros. Compatível com o Moodle 4.5 LTS e 5.3 LTS.
 
-1. Navegue para "Site administration > Plugins > Text editors > TipTap editor".
-2. Configure quais botões da barra de ferramentas devem estar habilitados.
-3. Salve as alterações.
+Instalação: envie o ZIP da release em *Administração do site > Plugins > Instalar plugins*, ou clone este repositório em `public/lib/editor/tiptap` (`lib/editor/tiptap` no Moodle 4.5) e acesse *Administração do site > Notificações*. Depois habilite-o em *Administração do site > Plugins > Editores de texto > Gerenciar editores*.
 
-## Ativação
-
-1. Vá para "Site administration > Plugins > Text editors > Manage editors".
-2. Habilite o "TipTap editor".
-3. Mova-o para a posição desejada na lista de editores disponíveis.
-
-## Uso
-
-Uma vez instalado e ativado, o editor TipTap estará disponível como uma opção para os usuários em suas preferências de editor.
-
-## Estrutura do Plugin
-
-```
-editor_tiptap/
-├── version.php          # Informações de versão do plugin
-├── lib.php             # Classe principal do editor
-├── settings.php        # Configurações administrativas
-├── styles.css          # Estilos CSS do editor
-├── README.md           # Este arquivo
-├── lang/               # Arquivos de idioma
-│   ├── en/
-│   │   └── editor_tiptap.php
-│   └── pt_br/
-│       └── editor_tiptap.php
-├── db/                 # Definições de banco de dados
-│   ├── access.php      # Definições de capabilities
-│   └── install.xml     # Schema do banco de dados
-└── amd/               # Módulos JavaScript AMD
-    └── src/
-        └── editor.js   # Módulo principal do editor
-```
-
-## Desenvolvimento
-
-### Compilar JavaScript
-
-Se você modificar o código JavaScript em `amd/src/`, será necessário executar o Grunt para compilar.
-
-**IMPORTANTE:** O comando Grunt deve ser executado a partir do diretório raiz do Moodle, não do diretório do plugin:
-
-```bash
-# Navegue até o diretório raiz do Moodle
-cd /path/to/moodle
-
-# Execute o Grunt para compilar o JavaScript do plugin
-grunt amd --root=editor/tiptap
-```
-
-**Compilação automática (modo watch):**
-
-Para recompilar automaticamente sempre que modificar os arquivos JavaScript, use o modo watch:
-
-```bash
-cd /path/to/moodle
-grunt watch
-```
-
-O Grunt ficará monitorando todos os arquivos do Moodle e recompilará automaticamente quando detectar mudanças. Útil durante o desenvolvimento!
-
-**Nota:** Se você ainda não tem o Grunt instalado no Moodle:
-```bash
-cd /path/to/moodle
-npm install
-```
-
-### Limpar caches
-
-Após fazer alterações, limpe os caches do Moodle:
-
-```bash
-php admin/cli/purge_caches.php
-```
-
-Ou navegue para "Site administration > Development > Purge all caches".
-
-## Licença
-
-Este plugin é licenciado sob a GNU GPL v3 ou posterior.
-
-## Créditos
-
-Desenvolvido em 2025.
-
-## Suporte
-
-Para relatar problemas ou sugerir melhorias, entre em contato através do seu canal de suporte preferido.
+Mudanças: [CHANGELOG.md](CHANGELOG.md). Licença: GNU GPL v3 ou posterior.

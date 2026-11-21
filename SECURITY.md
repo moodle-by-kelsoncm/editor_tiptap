@@ -8,7 +8,7 @@ Correções de segurança são aplicadas às versões conforme a tabela abaixo:
 
 | Versão | Suportada |
 |-------|-----------|
-| 1.0.x | Sim       |
+| 1.1.x | Sim       |
 
 > Nota: versões fora do intervalo suportado podem não receber correções. Recomendamos sempre atualizar para a última release disponível.
 

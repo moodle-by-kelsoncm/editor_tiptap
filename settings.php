@@ -18,7 +18,7 @@
  * TipTap editor settings.
  *
  * @package    editor_tiptap
- * @copyright  2025
+ * @copyright  2025 Kelson da Costa Medeiros <kelsoncm@gmail.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
