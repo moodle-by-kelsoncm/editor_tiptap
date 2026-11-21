@@ -3,7 +3,7 @@ import moodle_docs_theme
 project = "moodle-editor_tiptap"
 copyright = "2025, Kelson da Costa Medeiros"
 author = "Kelson da Costa Medeiros"
-release = "1.1.0"
+release = "1.1.1"
 
 extensions = [
     "sphinx.ext.githubpages",
