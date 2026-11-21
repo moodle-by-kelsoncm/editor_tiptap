@@ -15,8 +15,8 @@ Key features
 - **Toolbar**: paragraph and headings (H1, H2, H3), bold, italic, underline, bullet and ordered lists, links, undo and redo.
 - **Settings**: each formatting button (bold, italic, underline, lists and link) can be turned off by the administrator.
 - **Links**: the insert link dialog accepts ``http(s)://``, ``mailto:``, relative (``/``) and anchor (``#``) links only.
-- **Safe loading**: scripts, embedded objects, event handler attributes and ``javascript:`` links are removed from the text
-  when it is loaded into the editor.
+- **Safe loading**: the text is loaded through an allow list of elements and attributes; scripts, frames, styles, SVG,
+  forms, event handlers and unsafe links (such as ``javascript:``) are removed.
 - **Theme colours**: the editor follows the Bootstrap colours of the theme, including the Boost colour modes.
 - **Privacy**: the plugin stores no personal data.
 
@@ -24,6 +24,8 @@ Limitations
 -----------
 
 - No file or image upload, no media embedding, no tables and no source code view.
+- Content outside the allow list (for example embedded frames) is removed when the text is edited and saved; opening and
+  saving a form without changing the text keeps it as stored.
 - Text stored in other formats (for example Moodle auto-format or Markdown) opens in the next enabled editor that supports that format.
 
 Documentation

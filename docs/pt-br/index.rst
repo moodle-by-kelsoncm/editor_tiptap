@@ -16,8 +16,8 @@ Recursos principais
   links, desfazer e refazer.
 - **Configurações**: cada botão de formatação (negrito, itálico, sublinhado, listas e link) pode ser desligado pelo administrador.
 - **Links**: a janela de inserir link aceita só links ``http(s)://``, ``mailto:``, relativos (``/``) e âncoras (``#``).
-- **Carregamento seguro**: scripts, objetos incorporados, atributos de eventos e links ``javascript:`` são removidos do texto
-  ao carregá-lo no editor.
+- **Carregamento seguro**: o texto é carregado por uma lista de elementos e atributos permitidos; scripts, frames, estilos,
+  SVG, formulários, atributos de eventos e links inseguros (como ``javascript:``) são removidos.
 - **Cores do tema**: o editor segue as cores Bootstrap do tema, inclusive os modos de cor do Boost.
 - **Privacidade**: o plugin não armazena dados pessoais.
 
@@ -25,6 +25,8 @@ Limitações
 ----------
 
 - Sem envio de arquivos ou imagens, sem mídia incorporada, sem tabelas e sem visualização do código-fonte.
+- Conteúdo fora da lista permitida (por exemplo, frames incorporados) é removido quando o texto é editado e salvo; abrir e
+  salvar um formulário sem mudar o texto o mantém como está gravado.
 - Textos gravados em outros formatos (por exemplo, formato automático do Moodle ou Markdown) abrem no próximo editor habilitado
   que suporte esse formato.
 

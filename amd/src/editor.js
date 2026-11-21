@@ -38,27 +38,107 @@ const STRINGS = [
 /** @type {RegExp} Link targets accepted by the insert link dialog. */
 const ALLOWEDURL = /^(https?:\/\/|mailto:|\/|#)/i;
 
+/** @type {Set<string>} Elements dropped with their content. */
+const DROPPED = new Set([
+    'applet', 'base', 'button', 'embed', 'form', 'frame', 'frameset', 'iframe', 'input', 'link', 'math', 'meta',
+    'noscript', 'object', 'option', 'script', 'select', 'style', 'svg', 'template', 'textarea',
+]);
+
+/** @type {Set<string>} Elements kept; any other element is replaced by its content. */
+const ALLOWEDTAGS = new Set([
+    'a', 'abbr', 'audio', 'b', 'blockquote', 'br', 'caption', 'cite', 'code', 'col', 'colgroup', 'dd', 'del', 'div',
+    'dl', 'dt', 'em', 'figcaption', 'figure', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'hr', 'i', 'img', 'ins', 'kbd', 'li',
+    'mark', 'ol', 'p', 'picture', 'pre', 'q', 's', 'small', 'source', 'span', 'strike', 'strong', 'sub', 'sup', 'table',
+    'tbody', 'td', 'tfoot', 'th', 'thead', 'tr', 'track', 'u', 'ul', 'video',
+]);
+
+/** @type {Set<string>} Attributes kept on allowed elements. */
+const ALLOWEDATTRS = new Set([
+    'alt', 'cite', 'class', 'colspan', 'controls', 'datetime', 'dir', 'height', 'href', 'kind', 'label', 'lang',
+    'poster', 'rel', 'reversed', 'rowspan', 'scope', 'src', 'srclang', 'start', 'style', 'target', 'title', 'type',
+    'width',
+]);
+
+/** @type {Set<string>} Attributes that hold a URL. */
+const URLATTRS = new Set(['cite', 'href', 'poster', 'src']);
+
+/** @type {RegExp} URLs kept in content: no scheme (relative) or a safe scheme. */
+const SAFEURL = /^(https?:|mailto:|tel:|[^:]*$)/i;
+
+/** @type {RegExp} Images embedded in the content. */
+const DATAIMAGE = /^data:image\/(png|gif|jpe?g|webp);/i;
+
 /**
- * Copy the HTML of the text area into the editable area, without scripts or event handlers.
+ * Check whether an attribute may be copied to the editable area.
+ *
+ * @param {string} tag Element name.
+ * @param {string} name Attribute name.
+ * @param {string} value Attribute value.
+ * @returns {boolean}
+ */
+const isAllowedAttribute = (tag, name, value) => {
+    if (!ALLOWEDATTRS.has(name)) {
+        return false;
+    }
+    // eslint-disable-next-line no-control-regex
+    const compact = value.replace(/[\s\u0000-\u001f\u007f-\u009f]/g, '');
+    if (URLATTRS.has(name)) {
+        return SAFEURL.test(compact) || (tag === 'img' && name === 'src' && DATAIMAGE.test(compact));
+    }
+    if (name === 'style') {
+        return !/(expression|javascript:|url\()/i.test(compact);
+    }
+    return true;
+};
+
+/**
+ * Copy the children of a parsed node into a target, rebuilding only allowed elements and attributes.
+ *
+ * @param {Node} source Parsed node (inert document).
+ * @param {Node} target Node of the page that receives the clean copy.
+ */
+const copyClean = (source, target) => {
+    source.childNodes.forEach((child) => {
+        if (child.nodeType === Node.TEXT_NODE) {
+            target.appendChild(document.createTextNode(child.textContent));
+            return;
+        }
+        if (child.nodeType !== Node.ELEMENT_NODE) {
+            return;
+        }
+        const tag = child.nodeName.toLowerCase();
+        if (DROPPED.has(tag)) {
+            return;
+        }
+        if (!ALLOWEDTAGS.has(tag)) {
+            copyClean(child, target);
+            return;
+        }
+        const el = document.createElement(tag);
+        Array.from(child.attributes).forEach((attr) => {
+            const name = attr.name.toLowerCase();
+            if (isAllowedAttribute(tag, name, attr.value)) {
+                el.setAttribute(name, attr.value);
+            }
+        });
+        copyClean(child, el);
+        target.appendChild(el);
+    });
+};
+
+/**
+ * Load the HTML of the text area into the editable area through an allow list.
+ *
+ * The HTML is parsed in an inert document (nothing runs or loads there) and only allowed
+ * elements and attributes are rebuilt in the page, so scripts, event handlers, frames and
+ * unsafe URLs never reach the editable area.
  *
  * @param {string} html HTML stored in the text area.
  * @param {HTMLElement} target Editable area.
  */
 const loadContent = (html, target) => {
     const parsed = new DOMParser().parseFromString(html || '', 'text/html');
-    parsed.body.querySelectorAll('script, object, embed, link[rel="import"]').forEach((el) => el.remove());
-    parsed.body.querySelectorAll('*').forEach((el) => {
-        Array.from(el.attributes).forEach((attr) => {
-            // eslint-disable-next-line no-control-regex
-            const value = attr.value.replace(/[\s\u0000-\u001f\u007f-\u009f]/g, '');
-            if (attr.name.toLowerCase().startsWith('on') || /^javascript:/i.test(value)) {
-                el.removeAttribute(attr.name);
-            }
-        });
-    });
-    while (parsed.body.firstChild) {
-        target.appendChild(parsed.body.firstChild);
-    }
+    copyClean(parsed.body, target);
 };
 
 /**
@@ -209,7 +289,11 @@ export const init = async(elementId, options) => {
     }
     loadContent(textarea.value, content);
 
+    // The text area keeps the stored text until the user changes something, so content the
+    // editor does not support (dropped by the allow list) is only lost when the text is edited.
+    let changed = false;
     const sync = () => {
+        changed = true;
         textarea.value = content.innerHTML;
     };
 
@@ -244,11 +328,13 @@ export const init = async(elementId, options) => {
     textarea.parentNode.insertBefore(container, textarea.nextSibling);
 
     content.addEventListener('input', sync);
-    content.addEventListener('blur', sync);
-    sync();
 
     const form = textarea.closest('form');
     if (form) {
-        form.addEventListener('submit', sync);
+        form.addEventListener('submit', () => {
+            if (changed) {
+                sync();
+            }
+        });
     }
 };

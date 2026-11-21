@@ -13,6 +13,8 @@ First version prepared for the Moodle Marketplace.
 - Disabled toolbar buttons are really hidden: the settings now reach JavaScript as booleans (the string `'0'` was treated as enabled).
 - The text given by the form is kept by the base editor class (`get_text()` returned an empty string).
 - `styles.css` is loaded by Moodle only (no `$PAGE->requires->css()`), has the GPL header and uses the Bootstrap colours of the theme, including the Boost colour modes.
+- The text is loaded into the editor through an allow list of elements and attributes, rebuilt from an inert parsed document: frames (`iframe srcdoc`), styles, SVG, forms, event handlers and unsafe URLs are removed (the old filter let `iframe srcdoc` and SVG animations through).
+- The stored text is only rewritten when the user changes it, so unsupported content is not lost by opening and saving a form.
 - Toolbar and editing area have accessible names and roles.
 - Documentation describes the actual behaviour: the plugin does not bundle the TipTap library, and the Git install folder is `lib/editor/tiptap`.
 
